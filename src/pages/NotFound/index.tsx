@@ -1,8 +1,6 @@
-// src/pages/NotFound.tsx
 import React from 'react';
-
 const NotFound: React.FC = () => {
-  return <div>404 - 页面未找到</div>;
+  return <div>NotFound Page</div>;
 };
 
 export default NotFound;

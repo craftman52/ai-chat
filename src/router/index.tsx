@@ -2,13 +2,13 @@
 import type { RouteItem } from './type';
 // 导入页面组件
 import Home from '../pages/Home';
-import About from '../pages/About';
+import Login from '../pages/Login';
 import User from '../pages/User';
 import NotFound from '../pages/NotFound';
 
 import Dashboard from '../pages/Dashboard';
-import DashboardHome from '../pages/DashboardHome';
-import DashboardSetting from '../pages/DashboardSetting';
+import DashboardHome from '../pages/Dashboard/DashboardHome';
+import DashboardSetting from '../pages/Dashboard/DashboardSetting';
 
 // 定义路由数组，集中管理所有路由规则
 export const routes: RouteItem[] = [
@@ -35,9 +35,9 @@ export const routes: RouteItem[] = [
     ],
   },
   {
-    path: '/about',
+    path: '/Login',
     name: '关于',
-    element: <About />,
+    element: <Login />,
   },
   {
     path: '/user/:id',
