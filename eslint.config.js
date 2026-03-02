@@ -23,7 +23,7 @@ export default tseslint.config(
       '**/*.js', // 如果你想忽略所有 JS 文件
     ],
   },
-  
+
   // 全局配置
   {
     files: ['**/*.{js,jsx,ts,tsx}'],
@@ -35,7 +35,9 @@ export default tseslint.config(
         ecmaFeatures: {
           jsx: true,
         },
-        project: './tsconfig.json',
+        // 将 project 替换为 projectService
+        // project: './tsconfig.json',  // <-- 移除或注释这行
+        projectService: true, // <-- 添加这行
         tsconfigRootDir: import.meta.dirname,
       },
       globals: {
@@ -60,49 +62,52 @@ export default tseslint.config(
     rules: {
       // ESLint 推荐规则
       ...js.configs.recommended.rules,
-      
+
       // TypeScript 推荐规则
       ...tseslint.configs.recommended.rules,
-      
+
       // React 推荐规则
       ...react.configs.recommended.rules,
       ...react.configs['jsx-runtime'].rules,
-      
+
       // React Hooks 规则
       ...reactHooks.configs.recommended.rules,
-      
+
       // JSX Accessibility 规则
       ...jsxA11y.configs.recommended.rules,
-      
+
       // 自定义规则
       'react/react-in-jsx-scope': 'off',
       'react/prop-types': 'off',
       'react/display-name': 'off',
-      
+
       // TypeScript 规则
       '@typescript-eslint/no-explicit-any': 'warn',
-      '@typescript-eslint/no-unused-vars': ['error', {
-        argsIgnorePattern: '^_',
-        varsIgnorePattern: '^_',
-      }],
-      '@typescript-eslint/consistent-type-imports': ['error', {
-        prefer: 'type-imports',
-        disallowTypeAnnotations: true,
-      }],
+      '@typescript-eslint/no-unused-vars': [
+        'error',
+        {
+          argsIgnorePattern: '^_',
+          varsIgnorePattern: '^_',
+        },
+      ],
+      '@typescript-eslint/consistent-type-imports': [
+        'error',
+        {
+          prefer: 'type-imports',
+          disallowTypeAnnotations: true,
+        },
+      ],
       '@typescript-eslint/explicit-function-return-type': 'off',
       '@typescript-eslint/explicit-module-boundary-types': 'off',
-      
+
       // React Refresh 规则
-      'react-refresh/only-export-components': [
-        'warn',
-        { allowConstantExport: true },
-      ],
-      
+      'react-refresh/only-export-components': ['warn', { allowConstantExport: true }],
+
       // Prettier 规则
       'prettier/prettier': ['error', {}, { usePrettierrc: true }],
     },
   },
-  
+
   // 针对测试文件的配置
   {
     files: ['**/*.test.{js,jsx,ts,tsx}', '**/*.spec.{js,jsx,ts,tsx}'],
@@ -112,7 +117,7 @@ export default tseslint.config(
       },
     },
   },
-  
+
   // 应用 Prettier 配置（必须在最后）
   eslintConfigPrettier
 );
