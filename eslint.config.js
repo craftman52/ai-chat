@@ -19,6 +19,8 @@ export default tseslint.config(
       '*.config.js',
       '*.config.ts',
       '.eslintcache',
+      '.prettierrc.js',
+      '**/*.js', // 如果你想忽略所有 JS 文件
     ],
   },
   
