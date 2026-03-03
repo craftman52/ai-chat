@@ -1,0 +1,277 @@
+/* 遮罩层 */
+.modal-mask {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(2px);
+  transition: all 0.3s ease;
+}
+
+/* Modal包装器 */
+.modal-wrapper {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+}
+
+/* Modal主体 */
+.modal {
+  position: relative;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  display: flex;
+  flex-direction: column;
+  max-width: 90vw;
+  max-height: 90vh;
+  pointer-events: auto;
+  transition: all 0.3s ease;
+}
+
+/* 位置变体 */
+.modal-center {
+  margin: 0 auto;
+}
+
+.modal-top {
+  margin-top: 20px;
+  align-self: flex-start;
+}
+
+.modal-right {
+  margin-right: 20px;
+  align-self: flex-end;
+}
+
+.modal-bottom {
+  margin-bottom: 20px;
+  align-self: flex-end;
+}
+
+.modal-left {
+  margin-left: 20px;
+  align-self: flex-start;
+}
+
+/* 尺寸变体 */
+.modal-small {
+  width: 400px;
+}
+
+.modal-medium {
+  width: 600px;
+}
+
+.modal-large {
+  width: 800px;
+}
+
+.modal-fullscreen {
+  width: 100vw;
+  height: 100vh;
+  max-width: 100vw;
+  max-height: 100vh;
+  border-radius: 0;
+}
+
+.modal-auto {
+  width: auto;
+  min-width: 300px;
+}
+
+/* 主题变体 */
+.modal-light {
+  background: white;
+  color: rgba(0, 0, 0, 0.85);
+}
+
+.modal-dark {
+  background: #1f1f1f;
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.modal-dark .modal-header {
+  border-bottom-color: #303030;
+}
+
+.modal-dark .modal-footer {
+  border-top-color: #303030;
+}
+
+.modal-dark .modal-close {
+  color: rgba(255, 255, 255, 0.45);
+}
+
+.modal-system {
+  background: light-dark(white, #1f1f1f);
+  color: light-dark(rgba(0, 0, 0, 0.85), rgba(255, 255, 255, 0.85));
+}
+
+/* 动画效果 */
+.modal-animation-fade {
+  animation: fadeIn 0.3s ease;
+}
+
+.modal-animation-slide {
+  animation: slideIn 0.3s ease;
+}
+
+.modal-animation-pop {
+  animation: popIn 0.3s cubic-bezier(0.18, 0.89, 0.32, 1.28);
+}
+
+.modal-closing {
+  animation: fadeOut 0.3s ease forwards !important;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateY(-30px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes popIn {
+  from {
+    transform: scale(0.8);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+/* 头部 */
+.modal-header {
+  padding: 16px 24px;
+  border-bottom: 1px solid #f0f0f0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-radius: 8px 8px 0 0;
+  cursor: move;
+  user-select: none;
+}
+
+.modal-title {
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 1.4;
+  word-wrap: break-word;
+}
+
+/* 关闭按钮 */
+.modal-close {
+  padding: 0;
+  background: transparent;
+  border: none;
+  font-size: 24px;
+  line-height: 1;
+  color: rgba(0, 0, 0, 0.45);
+  cursor: pointer;
+  transition: color 0.2s;
+}
+
+.modal-close:hover {
+  color: rgba(0, 0, 0, 0.75);
+}
+
+/* 内容区域 */
+.modal-body {
+  padding: 24px;
+  overflow-y: auto;
+  flex: 1;
+}
+
+/* 底部区域 */
+.modal-footer {
+  padding: 16px 24px;
+  border-top: 1px solid #f0f0f0;
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  border-radius: 0 0 8px 8px;
+}
+
+/* 按钮样式 */
+.modal-btn-ok,
+.modal-btn-cancel {
+  padding: 8px 16px;
+  border-radius: 4px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.2s;
+  border: 1px solid transparent;
+}
+
+.modal-btn-ok {
+  background: #1890ff;
+  color: white;
+}
+
+.modal-btn-ok:hover:not(:disabled) {
+  background: #40a9ff;
+}
+
+.modal-btn-ok:disabled {
+  background: #f5f5f5;
+  color: rgba(0, 0, 0, 0.25);
+  cursor: not-allowed;
+}
+
+.modal-btn-cancel {
+  background: white;
+  border-color: #d9d9d9;
+}
+
+.modal-btn-cancel:hover:not(:disabled) {
+  border-color: #40a9ff;
+  color: #40a9ff;
+}
+
+.modal-btn-cancel:disabled {
+  background: #f5f5f5;
+  color: rgba(0, 0, 0, 0.25);
+  cursor: not-allowed;
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+  .modal-small,
+  .modal-medium,
+  .modal-large {
+    width: 90vw;
+  }
+}
