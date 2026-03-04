@@ -1,0 +1,227 @@
+/* src/components/common/Steps/Steps.module.css */
+.steps {
+  display: flex;
+  width: 100%;
+  box-sizing: border-box;
+  font-family:
+    -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+}
+
+/* 水平方向 */
+.steps-horizontal {
+  flex-direction: row;
+  align-items: flex-start;
+}
+
+.steps-horizontal .step {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+.steps-horizontal .step-header {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  margin-bottom: 8px;
+}
+
+.steps-horizontal .step-icon-container {
+  position: relative;
+  z-index: 1;
+  flex-shrink: 0;
+}
+
+.steps-horizontal .step-line {
+  flex: 1;
+  height: 1px;
+  background-color: #e9ecef;
+  margin: 0 8px;
+  transition: background-color 0.3s;
+}
+
+.steps-horizontal .step-last .step-line {
+  display: none;
+}
+
+/* 垂直方向 */
+.steps-vertical {
+  flex-direction: column;
+}
+
+.steps-vertical .step {
+  display: flex;
+  position: relative;
+  min-height: 60px;
+}
+
+.steps-vertical .step-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-right: 12px;
+  flex-shrink: 0;
+}
+
+.steps-vertical .step-line {
+  width: 1px;
+  flex: 1;
+  background-color: #e9ecef;
+  margin: 4px 0;
+  transition: background-color 0.3s;
+}
+
+.steps-vertical .step-last .step-line {
+  display: none;
+}
+
+.steps-vertical .step-content {
+  flex: 1;
+  padding-bottom: 24px;
+}
+
+/* 步骤图标容器 */
+.step-icon-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background-color: #fff;
+  border: 2px solid #d9d9d9;
+  color: #d9d9d9;
+  font-size: 14px;
+  font-weight: 500;
+  transition: all 0.3s;
+}
+
+/* 步骤图标文本 */
+.step-icon {
+  line-height: 1;
+}
+
+/* 各状态样式 */
+.step-finish .step-icon-container {
+  border-color: #1890ff;
+  color: #1890ff;
+}
+
+.step-process .step-icon-container {
+  border-color: #1890ff;
+  background-color: #1890ff;
+  color: #fff;
+}
+
+.step-error .step-icon-container {
+  border-color: #ff4d4f;
+  color: #ff4d4f;
+}
+
+.step-wait .step-icon-container {
+  border-color: #d9d9d9;
+  color: #d9d9d9;
+}
+
+/* 连接线状态颜色 */
+.step-finish + .step-finish .step-line,
+.step-finish .step-line {
+  background-color: #1890ff;
+}
+
+/* 步骤内容 */
+.step-title {
+  font-size: 16px;
+  font-weight: 500;
+  color: #333;
+  margin-bottom: 4px;
+  transition: color 0.3s;
+}
+
+.step-description {
+  font-size: 14px;
+  color: #666;
+  line-height: 1.5;
+}
+
+.step-process .step-title {
+  color: #1890ff;
+  font-weight: 600;
+}
+
+.step-finish .step-title {
+  color: #333;
+}
+
+.step-error .step-title {
+  color: #ff4d4f;
+}
+
+.step-wait .step-title {
+  color: #999;
+}
+
+/* 尺寸变体 */
+.steps-small .step-icon-container {
+  width: 24px;
+  height: 24px;
+  font-size: 12px;
+}
+
+.steps-small .step-title {
+  font-size: 14px;
+}
+
+.steps-small .step-description {
+  font-size: 12px;
+}
+
+/* 点击交互 */
+.step-clickable {
+  cursor: pointer;
+}
+
+.step-clickable:hover .step-title {
+  color: #1890ff;
+}
+
+.step-clickable:hover .step-icon-container {
+  border-color: #1890ff;
+  transform: scale(1.05);
+}
+
+.step-clickable.step-process:hover .step-icon-container {
+  background-color: #40a9ff;
+  border-color: #40a9ff;
+}
+
+/* 响应式 */
+@media (max-width: 768px) {
+  .steps-horizontal {
+    flex-direction: column;
+  }
+
+  .steps-horizontal .step {
+    margin-bottom: 16px;
+  }
+
+  .steps-horizontal .step:last-child {
+    margin-bottom: 0;
+  }
+}
+
+/* 暗色主题支持（可选） */
+@media (prefers-color-scheme: dark) {
+  .step-title {
+    color: #e5e5e5;
+  }
+
+  .step-description {
+    color: #a0a0a0;
+  }
+
+  .step-wait .step-title {
+    color: #6c6c6c;
+  }
+}
