@@ -75,7 +75,19 @@ const Login: React.FC = () => {
         >
           <div className={styles.passwordInput}>
             <Input type={showPassword ? 'text' : 'password'} placeholder="请输入密码" clearable />
-            <div className={styles.eyeIcon} onClick={() => setShowPassword(!showPassword)}>
+            <div
+              className={styles.eyeIcon}
+              onClick={() => setShowPassword(!showPassword)}
+              onKeyDown={(e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                  e.preventDefault();
+                  setShowPassword(!showPassword);
+                }
+              }}
+              role="button"
+              tabIndex={0}
+              aria-label={showPassword ? '隐藏密码' : '显示密码'}
+            >
               {showPassword ? <EyeOutline /> : <EyeInvisibleOutline />}
             </div>
           </div>
@@ -83,7 +95,7 @@ const Login: React.FC = () => {
 
         <Form.Item>
           <div className={styles.rememberRow}>
-            <Checkbox name="remember">记住密码</Checkbox>
+            <Checkbox>记住密码</Checkbox>
             <Link to="/forgot-password" className={styles.forgotLink}>
               忘记密码?
             </Link>

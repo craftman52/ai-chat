@@ -2,6 +2,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { BrowserRouter } from 'react-router-dom'; // 引入路由上下文
+import '@ant-design/v5-patch-for-react-19';
 import App from './App';
 import '@/assets/styles/global.css'; // 引入全局样式
 

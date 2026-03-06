@@ -13,6 +13,8 @@ const Register: React.FC = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
+  const [form] = Form.useForm();
+
   const onFinish = async (values: RegisterForm) => {
     try {
       setLoading(true);
@@ -32,12 +34,6 @@ const Register: React.FC = () => {
     }
   };
 
-  const validateConfirmPassword = (value: string, formValues: RegisterForm) => {
-    if (value !== formValues.password) {
-      throw new Error('两次输入的密码不一致');
-    }
-  };
-
   return (
     <div className={styles.container}>
       <div className={styles.header}>
@@ -46,6 +42,7 @@ const Register: React.FC = () => {
       </div>
 
       <Form
+        form={form}
         layout="vertical"
         onFinish={onFinish}
         footer={
@@ -86,18 +83,32 @@ const Register: React.FC = () => {
         >
           <div className={styles.passwordInput}>
             <Input type={showPassword ? 'text' : 'password'} placeholder="请输入密码" clearable />
-            <div className={styles.eyeIcon} onClick={() => setShowPassword(!showPassword)}>
+            <button
+              type="button"
+              className={styles.eyeIcon}
+              onClick={() => setShowPassword(!showPassword)}
+              aria-label={showPassword ? '隐藏密码' : '显示密码'}
+            >
               {showPassword ? <EyeOutline /> : <EyeInvisibleOutline />}
-            </div>
+            </button>
           </div>
         </Form.Item>
 
         <Form.Item
           name="confirmPassword"
           label="确认密码"
+          dependencies={['password']}
           rules={[
             { required: true, message: '请再次输入密码' },
-            { validator: validateConfirmPassword },
+            {
+              validator: async (rule, value) => {
+                const password = form.getFieldValue('password');
+                if (value && value !== password) {
+                  return Promise.reject('两次输入的密码不一致');
+                }
+                return Promise.resolve();
+              },
+            },
           ]}
         >
           <div className={styles.passwordInput}>
@@ -106,16 +117,31 @@ const Register: React.FC = () => {
               placeholder="请再次输入密码"
               clearable
             />
-            <div
+            <button
+              type="button"
               className={styles.eyeIcon}
               onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+              aria-label={showConfirmPassword ? '隐藏密码' : '显示密码'}
             >
               {showConfirmPassword ? <EyeOutline /> : <EyeInvisibleOutline />}
-            </div>
+            </button>
           </div>
         </Form.Item>
 
-        <Form.Item name="agreeProtocol">
+        <Form.Item
+          name="agreeProtocol"
+          rules={[
+            {
+              validator: async (_, value) => {
+                if (!value) {
+                  return Promise.reject('请阅读并同意用户协议和隐私政策');
+                }
+                return Promise.resolve();
+              },
+            },
+          ]}
+          valuePropName="checked" // 重要：Checkbox 的 value 属性是 checked
+        >
           <Checkbox>
             我已阅读并同意
             <Link to="/terms" className={styles.protocolLink}>
